@@ -82,28 +82,25 @@ edges.append(Edge(nodes[6], nodes[8], 2))
 
 edges.sort(key=lambda e: e.value)
 
-trees = []
-tree_edges = []
-
 nodes_sets = get_components(nodes, edges)
 
-for nodes_set in nodes_sets:
-    while True:
-        components = get_components(nodes_set, tree_edges)
-        if len(components) <= 1:
-            break
-        for i in range(len(components)):
-            for node in components[i]:
-                node.component = i
+trees = []
 
+for nodes_set in nodes_sets:
+    tree_nodes = []
+    tree_edges = []
+    tree_nodes.append(nodes_set[0])
+    while len(tree_nodes) != len(nodes_set):
         for edge in edges:
-            if edge.frm.component != edge.to.component:
+            if (edge.frm in tree_nodes) ^ (edge.to in tree_nodes): # XOR
                 if edge in tree_edges:
                     continue
+                if edge.frm in tree_nodes:
+                    tree_nodes.append(edge.to)
+                else:
+                    tree_nodes.append(edge.frm)
                 tree_edges.append(edge)
-                break
     trees.append(tree_edges)
-    tree_edges = []
 
 for tree in trees:
     for edge in tree:
