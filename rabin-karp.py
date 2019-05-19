@@ -13,20 +13,23 @@ def rk_search(source, sample):
     n = len(source)
     m = len(sample)
     sample_hash = hash(sample)
-    print(f"sample hash ({sample}): {sample_hash}")
+    # print(f"sample hash ({sample}): {sample_hash}")
+    print("sample hash ({}): {}".format(sample, sample_hash))
     while index+m <= n:
         source_hash = hash(source[index:index+m])
-        print(f"index: {index}, source hash ({source[index:index+m]}): {source_hash}")
+        # print(f"index: {index}, source hash ({source[index:index+m]}): {source_hash}")
+        print("index: {}, source hash ({}): {}".format(index, source[index:index+m], source_hash))
         if source_hash == sample_hash:
             ok = True
             for i in range(m):
                 if source[index+i] != sample[i]:
                     ok = False
+                    break
             if ok:
                 return index
         index += 1
     return -1
 
-res = rk_search("gary numan - cars", "cars")
+res = rk_search("ground control to major Tom", "major")
 
 print(res)
