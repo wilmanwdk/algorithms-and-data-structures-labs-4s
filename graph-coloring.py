@@ -44,7 +44,6 @@ while not len(indices) == 0:
         ok = True
         for j in ind_set:
             if nodes[i] in adjacent_nodes(nodes[j], edges):
-                print(f"{i} is adjacent to {j}")
                 ok = False
                 break
         if ok:

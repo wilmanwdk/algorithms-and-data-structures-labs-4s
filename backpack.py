@@ -9,7 +9,7 @@ class Node:
     
 w = [3, 4, 5, 8, 9]
 p = [1, 6, 4, 7, 6]
-n = 5
+n = len(w)
 s = 13
 
 def build_tree(node):
